@@ -11,9 +11,9 @@
             --bg-dark: #020617;
             --bg-card: rgba(30, 41, 59, 0.4);
             --bg-card-hover: rgba(30, 41, 59, 0.7);
-            --primary: #38bdf8; /* Cyan */
-            --secondary: #a855f7; /* Purple */
-            --accent: #f43f5e; /* Rose */
+            --primary: #38bdf8;
+            --secondary: #a855f7;
+            --accent: #f43f5e;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
@@ -36,7 +36,6 @@
             position: relative;
         }
 
-        /* Fundo animado moderno */
         body::before {
             content: '';
             position: fixed;
@@ -57,7 +56,6 @@
             100% { transform: translate(-5%, -5%); }
         }
 
-        /* Grid de fundo sutil */
         body::after {
             content: '';
             position: fixed;
@@ -79,7 +77,6 @@
             padding: 40px 20px;
         }
 
-        /* Header Tech */
         header {
             text-align: center;
             padding: 80px 20px;
@@ -120,7 +117,6 @@
             box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
         }
 
-        /* Seções */
         .section {
             margin-bottom: 80px;
         }
@@ -152,7 +148,7 @@
             box-shadow: 0 0 20px var(--glow-secondary);
         }
 
-        /* Bento Grid para Componentes */
+        /* Bento Grid */
         .bento-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -220,7 +216,6 @@
             font-weight: 500;
         }
 
-        /* Card Destaque para Chromebook */
         .bento-card.highlight-card {
             grid-column: span 2;
             background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(168, 85, 247, 0.1));
@@ -246,7 +241,6 @@
             overflow: hidden;
             aspect-ratio: 4/3;
             border: 1px solid var(--border);
-            group: true;
         }
 
         .gallery-item img {
@@ -289,7 +283,7 @@
             transform: translateY(0);
         }
 
-        /* Lista de Aprendizados */
+        /* Lista */
         .learnings-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -330,7 +324,6 @@
             font-size: 0.9rem;
         }
 
-        /* Vídeo */
         .video-wrapper {
             position: relative;
             border-radius: 20px;
@@ -344,7 +337,6 @@
             display: block;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 40px;
@@ -362,7 +354,6 @@
             text-decoration: none;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -439,6 +430,13 @@
                 </div>
 
                 <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-microphone-lines"></i></div>
+                    <h4>Sensor de Som</h4>
+                    <p><strong>Função:</strong> Capta ondas sonoras e as converte em sinais elétricos (analógico e digital).</p>
+                    <p><strong>Importância:</strong> Permite detectar batidas, palmas, ruídos e níveis de音量, sendo usado em projetos de automação, alarmes e interfaces controladas por som.</p>
+                </div>
+
+                <div class="bento-card">
                     <div class="card-icon"><i class="fas fa-plug"></i></div>
                     <h4>Fios Jumper</h4>
                     <p><strong>Função:</strong> Conexões elétricas na protoboard.</p>
@@ -452,12 +450,55 @@
                     <p><strong>Importância:</strong> Demonstra fisicamente que a luz branca é a soma de todas as cores.</p>
                 </div>
 
-                <!-- Card Destaque do Chromebook -->
                 <div class="bento-card highlight-card">
                     <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
                     <h4>Chromebook</h4>
                     <p><strong>Função:</strong> Estação de trabalho, programação e interface de controle.</p>
                     <p><strong>Importância:</strong> Utilizado para escrever e compilar o código (via Arduino Web Editor), fazer o upload via USB, monitorar a porta serial em tempo real e desenvolver interfaces de controle para os projetos de IoT.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-flask"></i></div>
+                <h2>Práticas Realizadas</h2>
+            </div>
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h4>1. LEDs com Arduino</h4>
+                    <p>Montagem de circuito com LEDs coloridos controlados via pinos digitais, com resistores de proteção e sequências programadas.</p>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-hand-pointer"></i></div>
+                    <h4>2. Sensor Capacitivo</h4>
+                    <p>Criação de um detector de proximidade que responde à presença da mão sem contato físico, simulando interfaces touch.</p>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-microphone-lines"></i></div>
+                    <h4>3. Sensor de Som</h4>
+                    <p>Projeto que detecta batidas, palmas ou ruídos ambientais e aciona LEDs ou buzzers em resposta, demonstrando a conversão de sinais acústicos em elétricos.</p>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-compact-disc"></i></div>
+                    <h4>4. Disco de Newton</h4>
+                    <p>Experimento clássico de óptica que comprova a composição da luz branca através da rotação rápida de um disco colorido.</p>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h4>5. Integração com Chromebook</h4>
+                    <p>Programação e upload de códigos via Chromebook, utilizando o Arduino Web Editor e monitoramento serial.</p>
+                </div>
+
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h4>6. Circuitos Avançados</h4>
+                    <p>Trabalho em equipe com múltiplos componentes: botões, joysticks e módulos de controle integrados.</p>
                 </div>
             </div>
         </section>
@@ -481,6 +522,12 @@
                     </div>
                 </div>
                 <div class="gallery-item">
+                    <img src="sensor_som.jpg" alt="Sensor de Som">
+                    <div class="gallery-overlay">
+                        <p><i class="fas fa-microphone-lines"></i> Sensor de Som</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
                     <img src="disco_newton.jpg" alt="Disco de Newton">
                     <div class="gallery-overlay">
                         <p><i class="fas fa-palette"></i> Disco de Newton</p>
@@ -496,12 +543,6 @@
                     <img src="chromebook.jpg" alt="Chromebook e Arduino">
                     <div class="gallery-overlay">
                         <p><i class="fas fa-laptop-code"></i> Programação no Chromebook</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="circuitos.jpg" alt="Circuitos Avançados">
-                    <div class="gallery-overlay">
-                        <p><i class="fas fa-project-diagram"></i> Montagem Avançada</p>
                     </div>
                 </div>
             </div>
@@ -568,7 +609,7 @@
             </div>
             <div class="bento-card" style="padding: 20px;">
                 <ul style="list-style: none; color: var(--text-muted);">
-                    <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">👤 Nome do Integrante 1</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid var(--border);"> Nome do Integrante 1</li>
                     <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">👤 Nome do Integrante 2</li>
                     <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">👤 Nome do Integrante 3</li>
                     <li style="padding: 10px 0;">👤 Nome do Integrante 4</li>
@@ -584,7 +625,6 @@
     </div>
 
     <script>
-        // Animação de entrada ao rolar (Scroll Reveal)
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
