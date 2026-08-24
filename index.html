@@ -4,730 +4,600 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatório de Práticas - Arduino e Eletrônica</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --bg-dark: #020617;
+            --bg-card: rgba(30, 41, 59, 0.4);
+            --bg-card-hover: rgba(30, 41, 59, 0.7);
+            --primary: #38bdf8; /* Cyan */
+            --secondary: #a855f7; /* Purple */
+            --accent: #f43f5e; /* Rose */
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glow-primary: rgba(56, 189, 248, 0.5);
+            --glow-secondary: rgba(168, 85, 247, 0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #667eea;
-            --secondary: #764ba2;
-            --accent: #f093fb;
-            --dark: #1a202c;
-            --light: #f7fafc;
-        }
-
         body {
             font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             line-height: 1.6;
-            color: var(--dark);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-attachment: fixed;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Animação de fundo */
+        /* Fundo animado moderno */
         body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            animation: bgMove 20s ease-in-out infinite alternate;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-5%, -5%); }
+        }
+
+        /* Grid de fundo sutil */
+        body::after {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
             pointer-events: none;
-            z-index: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+            padding: 40px 20px;
         }
 
-        /* Header Moderno */
+        /* Header Tech */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 60px 40px;
             text-align: center;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            text-shadow: 0 0 40px var(--glow-primary);
+        }
+
+        header .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 24px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Seções */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
             margin-bottom: 40px;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .section-header .icon-box {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 0 20px var(--glow-secondary);
+        }
+
+        /* Bento Grid para Componentes */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
         }
 
-        header::before {
+        .bento-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-        }
-
-        header:hover {
-            transform: translateY(-5px);
-        }
-
-        header h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3em;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            animation: fadeInDown 1s ease;
-        }
-
-        header .subtitle {
-            color: #666;
-            font-size: 1.4em;
-            font-weight: 300;
-            margin-bottom: 10px;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        header .date-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-top: 15px;
-            animation: fadeInUp 1s ease 0.4s both;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Cards Modernos */
-        .section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            margin-bottom: 30px;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-        }
-
-        .section h2 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary);
-            font-size: 2.2em;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            position: relative;
-        }
-
-        .section h2::after {
-            content: '';
-            flex: 1;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary), transparent);
-            margin-left: 10px;
-        }
-
-        .section h3 {
-            color: var(--secondary);
-            margin: 30px 0 15px 0;
-            font-size: 1.6em;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Highlight Box */
-        .highlight {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-            border-left: 5px solid #fdcb6e;
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight::before {
-            content: '💡';
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 3em;
-            opacity: 0.2;
-        }
-
-        .highlight strong {
-            color: #d63031;
-            font-size: 1.2em;
-        }
-
-        /* Grid de Componentes */
-        .componentes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .componente-card {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .componente-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
 
-        .componente-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        .bento-card:hover {
+            transform: translateY(-8px);
+            background: var(--bg-card-hover);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(56, 189, 248, 0.1);
         }
 
-        .componente-card:hover::before {
+        .bento-card:hover::before {
             opacity: 1;
         }
 
-        .componente-card h4 {
-            color: var(--primary);
+        .bento-card .card-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bento-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
             margin-bottom: 15px;
-            font-size: 1.4em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: relative;
-            z-index: 1;
+            color: var(--text-main);
         }
 
-        .componente-card p {
-            position: relative;
-            z-index: 1;
-            line-height: 1.8;
+        .bento-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 10px;
         }
 
-        .componente-card strong {
-            color: var(--secondary);
+        .bento-card strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Card Destaque para Chromebook */
+        .bento-card.highlight-card {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(168, 85, 247, 0.1));
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .bento-card.highlight-card {
+                grid-column: span 1;
+            }
         }
 
         /* Galeria */
-        .gallery {
+        .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            gap: 20px;
         }
 
         .gallery-item {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
             position: relative;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px) rotate(2deg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--border);
+            group: true;
         }
 
         .gallery-item img {
             width: 100%;
-            height: 280px;
+            height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            transition: transform 0.6s ease;
         }
 
         .gallery-item:hover img {
             transform: scale(1.1);
         }
 
-        .gallery-item p {
-            padding: 20px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--dark);
-            background: white;
-            position: relative;
-        }
-
         .gallery-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8) 0%, rgba(118, 75, 162, 0.8) 100%);
+            inset: 0;
+            background: linear-gradient(to top, rgba(2, 6, 23, 0.9) 0%, transparent 100%);
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s;
         }
 
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
 
-        .gallery-overlay i {
+        .gallery-overlay p {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
             color: white;
-            font-size: 3em;
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay p {
+            transform: translateY(0);
+        }
+
+        /* Lista de Aprendizados */
+        .learnings-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            list-style: none;
+        }
+
+        .learnings-list li {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s;
+        }
+
+        .learnings-list li:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .learnings-list li i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .learnings-list li strong {
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .learnings-list li span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
         /* Vídeo */
-        .video-container {
+        .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
+            border-radius: 20px;
             overflow: hidden;
-            max-width: 100%;
-            background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
-            margin: 30px 0;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.1);
         }
 
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-wrapper video {
             width: 100%;
-            height: 100%;
-        }
-
-        /* Lista Estilizada */
-        ul {
-            list-style: none;
-            margin: 20px 0;
-        }
-
-        ul li {
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        ul li:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
-        }
-
-        ul li::before {
-            content: '✓';
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
+            display: block;
         }
 
         /* Footer */
         footer {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
             text-align: center;
             padding: 40px;
-            margin-top: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-top: 1px solid var(--border);
+            margin-top: 60px;
+            color: var(--text-muted);
         }
 
         footer p {
-            margin: 10px 0;
-            color: #666;
+            margin: 5px 0;
         }
 
-        footer strong {
+        footer a {
             color: var(--primary);
-            font-size: 1.2em;
+            text-decoration: none;
         }
 
-        /* Animações */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            
-            .section {
-                padding: 25px;
-            }
-            
-            .componentes-grid,
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Scrollbar personalizada */
+        /* Scrollbar */
         ::-webkit-scrollbar {
-            width: 12px;
+            width: 8px;
         }
-
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
+            background: var(--bg-dark);
         }
-
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: var(--secondary);
             border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-microchip"></i> Relatório de Práticas</h1>
-            <p class="subtitle">Eletrônica e Arduino - 2º Semestre 2024</p>
-            <div class="date-badge">
+            <h1>Relatório de Práticas</h1>
+            <p class="subtitle">Eletrônica, Arduino e Programação — 2º Semestre</p>
+            <div class="badge">
                 <i class="fas fa-calendar-alt"></i> Entrega: 28/08/2024
             </div>
         </header>
 
         <section class="section">
-            <h2><i class="fas fa-book-open"></i> Introdução</h2>
-            <p style="font-size: 1.1em; line-height: 1.8;">
-                Este relatório apresenta todas as práticas desenvolvidas durante o segundo semestre na disciplina de 
-                eletrônica e programação com Arduino. As atividades realizadas tiveram como objetivo proporcionar 
-                um aprendizado prático sobre circuitos elétricos, programação de microcontroladores, sensores e 
-                princípios da física relacionados à luz e cores.
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-rocket"></i></div>
+                <h2>Introdução</h2>
+            </div>
+            <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 800px;">
+                Este relatório documenta as práticas desenvolvidas na disciplina de eletrônica e programação. 
+                O foco foi unir teoria e prática, explorando circuitos elétricos, microcontroladores, 
+                sensores e os princípios físicos da luz e das cores.
             </p>
-            
-            <div class="highlight">
-                <strong><i class="fas fa-bullseye"></i> Objetivo:</strong> Demonstrar o funcionamento dos principais 
-                componentes eletrônicos e sua aplicação em projetos práticos, desenvolvendo habilidades de montagem 
-                de circuitos, programação e resolução de problemas.
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-microchip"></i></div>
+                <h2>Componentes Principais</h2>
             </div>
-        </section>
-
-        <section class="section">
-            <h2><i class="fas fa-tasks"></i> Práticas Realizadas</h2>
-
-            <h3><i class="fas fa-lightbulb"></i> 1. Arduino com LEDs e Breadboard</h3>
-            <p>Nesta prática, aprendemos a montar circuitos básicos utilizando uma protoboard (breadboard) e LEDs 
-            coloridos controlados por Arduino. O circuito permite acender LEDs de diferentes cores (vermelho, 
-            amarelo e azul) de forma programada.</p>
-            
-            <p><strong>Como funciona:</strong> O Arduino envia sinais elétricos através dos pinos digitais para os 
-            LEDs, fazendo-os acender em sequências programadas. Cada LED é conectado a um resistor para limitar 
-            a corrente e proteger o componente.</p>
-
-            <h3><i class="fas fa-hand-paper"></i> 2. Sensor Capacitivo de Proximidade</h3>
-            <p>Desenvolvemos um circuito com sensor capacitivo que detecta a proximidade da mão sem necessidade 
-            de contato físico. Este tipo de sensor é amplamente utilizado em dispositivos touch e interfaces modernas.</p>
-            
-            <p><strong>Aplicações:</strong> Sensores de proximidade, controles touch, detectores de nível de fluido 
-            e automação industrial.</p>
-
-            <h3><i class="fas fa-compact-disc"></i> 3. Disco de Newton - Mistura de Cores</h3>
-            <p>O disco de Newton é um experimento clássico da física que demonstra como a luz branca é composta 
-            por todas as cores do espectro visível. Quando girado rapidamente, as cores do arco-íris se misturam 
-            criando a ilusão de cor branca ou cinza claro.</p>
-            
-            <p><strong>Importância:</strong> Este experimento comprova que a luz branca é a soma de todas as cores 
-            do espectro visível, um princípio fundamental da óptica e física das cores.</p>
-
-            <h3><i class="fas fa-laptop"></i> 4. Integração Arduino com Chromebook</h3>
-            <p>Projeto que conecta um Chromebook ao Arduino, permitindo controle de LEDs e programação diretamente 
-            através do computador. Esta prática demonstra a integração entre hardware e software, além de introduzir 
-            conceitos de comunicação serial e desenvolvimento web.</p>
-            
-            <p><strong>Aplicação:</strong> Programação via USB, controle de dispositivos, automação e desenvolvimento 
-            de aplicações web para IoT.</p>
-
-            <h3><i class="fas fa-users"></i> 5. Montagem de Circuitos Avançados</h3>
-            <p>Trabalho em equipe para montagem de circuitos mais complexos utilizando múltiplos componentes, 
-            incluindo botões, joysticks e módulos de controle, desenvolvendo habilidades de trabalho colaborativo 
-            e resolução de problemas.</p>
-        </section>
-
-        <section class="section">
-            <h2><i class="fas fa-puzzle-piece"></i> Componentes Principais</h2>
-            <div class="componentes-grid">
-                <div class="componente-card">
-                    <h4><i class="fas fa-microchip"></i> Arduino Uno</h4>
-                    <p><strong>Função:</strong> Placa de microcontrolador programável que é o "cérebro" dos projetos.</p>
-                    <p><strong>Importância:</strong> Permite controlar componentes eletrônicos através de programação, 
-                    sendo a base para prototipagem de projetos de automação e robótica.</p>
+            <div class="bento-grid">
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                    <h4>Arduino Uno</h4>
+                    <p><strong>Função:</strong> O "cérebro" do projeto. Microcontrolador programável.</p>
+                    <p><strong>Importância:</strong> Processa o código e controla todos os componentes do circuito.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-th"></i> Breadboard</h4>
-                    <p><strong>Função:</strong> Placa de prototipagem que permite montar circuitos sem solda.</p>
-                    <p><strong>Importância:</strong> Facilita testes e modificações nos circuitos, sendo essencial 
-                    para aprendizado e desenvolvimento de projetos.</p>
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-border-all"></i></div>
+                    <h4>Breadboard</h4>
+                    <p><strong>Função:</strong> Placa de prototipagem sem solda.</p>
+                    <p><strong>Importância:</strong> Permite montar, testar e modificar circuitos rapidamente.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-lightbulb"></i> LEDs</h4>
-                    <p><strong>Função:</strong> Diodos emissores de luz que convertem energia elétrica em luz.</p>
-                    <p><strong>Importância:</strong> Componentes básicos para indicação visual, iluminação e 
-                    comunicação em circuitos eletrônicos.</p>
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h4>LEDs</h4>
+                    <p><strong>Função:</strong> Diodos emissores de luz (vermelho, amarelo, azul).</p>
+                    <p><strong>Importância:</strong> Saída visual do circuito, indicando estados e sequências.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-ohm"></i> Resistores</h4>
-                    <p><strong>Função:</strong> Limitam a corrente elétrica que passa pelos componentes.</p>
-                    <p><strong>Importância:</strong> Protegem LEDs e outros componentes contra danos por excesso 
-                    de corrente.</p>
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-wave-square"></i></div>
+                    <h4>Resistores</h4>
+                    <p><strong>Função:</strong> Limitar a corrente elétrica.</p>
+                    <p><strong>Importância:</strong> Protegem os LEDs e o Arduino contra curtos-circuitos.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-broadcast-tower"></i> Sensor Capacitivo</h4>
-                    <p><strong>Função:</strong> Detecta presença ou proximidade sem contato físico.</p>
-                    <p><strong>Importância:</strong> Utilizado em interfaces touch, automação e sistemas de detecção.</p>
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-hand-pointer"></i></div>
+                    <h4>Sensor Capacitivo</h4>
+                    <p><strong>Função:</strong> Detecta proximidade sem contato físico.</p>
+                    <p><strong>Importância:</strong> Base para interfaces touch e automação moderna.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-plug"></i> Fios Jumper</h4>
-                    <p><strong>Função:</strong> Conectam os componentes na breadboard e ao Arduino.</p>
-                    <p><strong>Importância:</strong> Permitem criar as conexões elétricas necessárias para o 
-                    funcionamento dos circuitos.</p>
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-plug"></i></div>
+                    <h4>Fios Jumper</h4>
+                    <p><strong>Função:</strong> Conexões elétricas na protoboard.</p>
+                    <p><strong>Importância:</strong> Interligam todos os componentes ao microcontrolador.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-palette"></i> Disco de Newton</h4>
-                    <p><strong>Função:</strong> Demonstra a composição da luz branca através das cores do espectro.</p>
-                    <p><strong>Importância:</strong> Ilustra princípios fundamentais da óptica e teoria das cores.</p>
+                <div class="bento-card">
+                    <div class="card-icon"><i class="fas fa-compact-disc"></i></div>
+                    <h4>Disco de Newton</h4>
+                    <p><strong>Função:</strong> Disco com as cores do espectro visível.</p>
+                    <p><strong>Importância:</strong> Demonstra fisicamente que a luz branca é a soma de todas as cores.</p>
                 </div>
 
-                <div class="componente-card">
-                    <h4><i class="fas fa-laptop-code"></i> Chromebook</h4>
-                    <p><strong>Função:</strong> Interface de programação e controle do Arduino via USB/Serial.</p>
-                    <p><strong>Importância:</strong> Permite programar o Arduino, monitorar dados em tempo real e 
-                    desenvolver interfaces web para controle dos projetos.</p>
+                <!-- Card Destaque do Chromebook -->
+                <div class="bento-card highlight-card">
+                    <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h4>Chromebook</h4>
+                    <p><strong>Função:</strong> Estação de trabalho, programação e interface de controle.</p>
+                    <p><strong>Importância:</strong> Utilizado para escrever e compilar o código (via Arduino Web Editor), fazer o upload via USB, monitorar a porta serial em tempo real e desenvolver interfaces de controle para os projetos de IoT.</p>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <h2><i class="fas fa-images"></i> Galeria de Imagens</h2>
-            <div class="gallery">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-images"></i></div>
+                <h2>Galeria de Práticas</h2>
+            </div>
+            <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="arduino_leds.jpg" alt="Arduino com LEDs">
                     <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
+                        <p><i class="fas fa-bolt"></i> Circuito de LEDs</p>
                     </div>
-                    <p><i class="fas fa-microchip"></i> Arduino com LEDs coloridos</p>
                 </div>
-
                 <div class="gallery-item">
                     <img src="sensor_capacitivo.jpg" alt="Sensor Capacitivo">
                     <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
+                        <p><i class="fas fa-hand-pointer"></i> Sensor de Proximidade</p>
                     </div>
-                    <p><i class="fas fa-hand-paper"></i> Sensor capacitivo de proximidade</p>
                 </div>
-
                 <div class="gallery-item">
                     <img src="disco_newton.jpg" alt="Disco de Newton">
                     <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
+                        <p><i class="fas fa-palette"></i> Disco de Newton</p>
                     </div>
-                    <p><i class="fas fa-compact-disc"></i> Disco de Newton em ação</p>
                 </div>
-
                 <div class="gallery-item">
                     <img src="equipe.jpg" alt="Trabalho em Equipe">
                     <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
+                        <p><i class="fas fa-users"></i> Trabalho em Grupo</p>
                     </div>
-                    <p><i class="fas fa-users"></i> Montagem em equipe</p>
                 </div>
-
                 <div class="gallery-item">
-                    <img src="chromebook.jpg" alt="Arduino com Chromebook">
+                    <img src="chromebook.jpg" alt="Chromebook e Arduino">
                     <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
+                        <p><i class="fas fa-laptop-code"></i> Programação no Chromebook</p>
                     </div>
-                    <p><i class="fas fa-laptop"></i> Integração Arduino + Chromebook</p>
                 </div>
-
                 <div class="gallery-item">
                     <img src="circuitos.jpg" alt="Circuitos Avançados">
                     <div class="gallery-overlay">
-                        <i class="fas fa-search-plus"></i>
+                        <p><i class="fas fa-project-diagram"></i> Montagem Avançada</p>
                     </div>
-                    <p><i class="fas fa-project-diagram"></i> Circuitos complexos</p>
                 </div>
             </div>
         </section>
 
         <section class="section">
-            <h2><i class="fas fa-video"></i> Vídeos das Práticas</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px;"><strong>Disco de Newton em funcionamento:</strong></p>
-            <div class="video-container">
-                <video controls poster="disco_newton_poster.jpg">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-video"></i></div>
+                <h2>Vídeo do Experimento</h2>
+            </div>
+            <div class="video-wrapper">
+                <video controls poster="disco_newton.jpg">
                     <source src="video_newton.mp4" type="video/mp4">
-                    Seu navegador não suporta o elemento de vídeo.
+                    Seu navegador não suporta vídeos.
                 </video>
             </div>
-            <div class="highlight">
-                <i class="fas fa-info-circle"></i> Para visualizar o vídeo, salve o arquivo na mesma pasta do HTML 
-                ou insira o link do vídeo hospedado.
-            </div>
-        </section>
-
-        <section class="section">
-            <h2><i class="fas fa-graduation-cap"></i> Importância e Aprendizados</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px;">As práticas desenvolvidas ao longo do semestre foram fundamentais para:</p>
-            <ul>
-                <li><strong>Compreensão teórica e prática:</strong> Unir conceitos teóricos de física, eletrônica 
-                e programação com aplicações reais.</li>
-                <li><strong>Desenvolvimento de habilidades técnicas:</strong> Aprender a montar circuitos, soldar 
-                componentes e programar microcontroladores.</li>
-                <li><strong>Trabalho em equipe:</strong> Colaborar com colegas para resolver problemas e completar projetos.</li>
-                <li><strong>Pensamento lógico:</strong> Desenvolver raciocínio lógico através da programação e 
-                depuração de códigos.</li>
-                <li><strong>Criatividade:</strong> Criar soluções inovadoras para os desafios propostos.</li>
-                <li><strong>Preparação para o futuro:</strong> Adquirir conhecimentos essenciais para áreas como 
-                robótica, automação, IoT e desenvolvimento de hardware.</li>
-            </ul>
-
-            <div class="highlight">
-                <strong><i class="fas fa-check-circle"></i> Conclusão:</strong> As práticas com Arduino e eletrônica 
-                proporcionaram uma experiência de aprendizado enriquecedora, permitindo não apenas compreender o 
-                funcionamento dos componentes eletrônicos, mas também desenvolver habilidades importantes para o 
-                século XXI, como pensamento computacional, resolução de problemas e trabalho colaborativo.
-            </div>
-        </section>
-
-        <section class="section">
-            <h2><i class="fas fa-user-friends"></i> Integrantes do Grupo</h2>
-            <p style="font-size: 1.1em; margin-bottom: 20px; font-style: italic; color: #666;">
-                <i class="fas fa-info-circle"></i> Preencher com os nomes dos integrantes do grupo
+            <p style="color: var(--text-muted); margin-top: 15px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> O vídeo acima mostra o Disco de Newton em rotação, 
+                demonstrando a mistura aditiva das cores do espectro visível.
             </p>
-            <ul>
-               <li>Pedro Henrique Frois</li>
-                <li>Gustavo Rodrigues</li>
-                <li>Guilherme Effegen</li>
-                <li>Eduardo França</li>
-                <li>Davi Goss</li>
-                <li>Nicolas Bueno</li>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-brain"></i></div>
+                <h2>Aprendizados</h2>
+            </div>
+            <ul class="learnings-list">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Teoria na Prática</strong>
+                        <span>Unimos física, eletrônica e programação em projetos reais.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Habilidades Técnicas</strong>
+                        <span>Montagem de circuitos, leitura de diagramas e depuração de código.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Trabalho em Equipe</strong>
+                        <span>Colaboração para resolver bugs e completar as montagens complexas.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Pensamento Lógico</strong>
+                        <span>Desenvolvimento de algoritmos e raciocínio computacional.</span>
+                    </div>
+                </li>
             </ul>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <div class="icon-box"><i class="fas fa-user-group"></i></div>
+                <h2>Integrantes</h2>
+            </div>
+            <div class="bento-card" style="padding: 20px;">
+                <ul style="list-style: none; color: var(--text-muted);">
+                    <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">👤 Nome do Integrante 1</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">👤 Nome do Integrante 2</li>
+                    <li style="padding: 10px 0; border-bottom: 1px solid var(--border);">👤 Nome do Integrante 3</li>
+                    <li style="padding: 10px 0;">👤 Nome do Integrante 4</li>
+                </ul>
+            </div>
         </section>
 
         <footer>
-            <p><strong><i class="fas fa-file-alt"></i> Relatório de Práticas - Eletrônica e Arduino</strong></p>
-            <p><i class="fas fa-calendar"></i> 2º Semestre 2024 | <i class="fas fa-clock"></i> Entrega: 28/08/2024</p>
-            <p><i class="fas fa-envelope"></i> levi.andrade.lima@escola.pr.gov.br</p>
+            <p><strong style="color: var(--text-main); font-size: 1.1rem;">Relatório de Práticas - Eletrônica e Arduino</strong></p>
+            <p>2º Semestre 2024 | Prazo: 28/08</p>
+            <p>Enviar para: <a href="mailto:levi.andrade.lima@escola.pr.gov.br">levi.andrade.lima@escola.pr.gov.br</a></p>
         </footer>
     </div>
 
     <script>
-        // Animação suave ao rolar
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Animação de entrada dos elementos
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
+        // Animação de entrada ao rolar (Scroll Reveal)
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = "1";
                     entry.target.style.transform = "translateY(0)";
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        document.querySelectorAll('.section, .componente-card, .gallery-item').forEach(el => {
+        document.querySelectorAll('.bento-card, .gallery-item, .section-header, .learnings-list li').forEach(el => {
             el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            el.style.transition = "all 0.6s ease-out";
+            el.style.transform = "translateY(30px)";
+            el.style.transition = "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
             observer.observe(el);
         });
     </script>
