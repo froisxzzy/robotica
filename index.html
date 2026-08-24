@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Práticas - Arduino e Eletrônica</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin: 20px 0 10px 0;
+            font-size: 1.5em;
+        }
+
+        .componentes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .componente-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .componente-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-item p {
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        footer {
+            background: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Relatório de Práticas - Eletrônica e Arduino</h1>
+            <p>Trabalho de Recuperação - 2º Semestre 2024</p>
+            <p><strong>Data de Entrega:</strong> 28/08/2024</p>
+        </header>
+
+        <section class="section">
+            <h2>📋 Introdução</h2>
+            <p>Este relatório apresenta todas as práticas desenvolvidas durante o segundo semestre na disciplina de eletrônica e programação com Arduino. As atividades realizadas tiveram como objetivo proporcionar um aprendizado prático sobre circuitos elétricos, programação de microcontroladores, sensores e princípios da física relacionados à luz e cores.</p>
+            
+            <div class="highlight">
+                <strong>Objetivo:</strong> Demonstrar o funcionamento dos principais componentes eletrônicos e sua aplicação em projetos práticos, desenvolvendo habilidades de montagem de circuitos, programação e resolução de problemas.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎯 Práticas Realizadas</h2>
+
+            <h3>1. Arduino com LEDs e Breadboard</h3>
+            <p>Nesta prática, aprendemos a montar circuitos básicos utilizando uma protoboard (breadboard) e LEDs coloridos controlados por Arduino. O circuito permite acender LEDs de diferentes cores (vermelho, amarelo e azul) de forma programada.</p>
+            
+            <p><strong>Como funciona:</strong> O Arduino envia sinais elétricos através dos pinos digitais para os LEDs, fazendo-os acender em sequências programadas. Cada LED é conectado a um resistor para limitar a corrente e proteger o componente.</p>
+
+            <h3>2. Sensor Capacitivo de Proximidade</h3>
+            <p>Desenvolvemos um circuito com sensor capacitivo que detecta a proximidade da mão sem necessidade de contato físico. Este tipo de sensor é amplamente utilizado em dispositivos touch e interfaces modernas.</p>
+            
+            <p><strong>Aplicações:</strong> Sensores de proximidade, controles touch, detectores de nível de fluido e automação industrial [[8]].</p>
+
+            <h3>3. Disco de Newton - Mistura de Cores</h3>
+            <p>O disco de Newton é um experimento clássico da física que demonstra como a luz branca é composta por todas as cores do espectro visível. Quando girado rapidamente, as cores do arco-íris (vermelho, laranja, amarelo, verde, azul, anil e violeta) se misturam criando a ilusão de cor branca ou cinza claro [[12]][[13]].</p>
+            
+            <p><strong>Importância:</strong> Este experimento comprova que a luz branca é a soma de todas as cores do espectro visível, um princípio fundamental da óptica e física das cores.</p>
+
+            <h3>4. Integração Arduino com Smartphone</h3>
+            <p>Projeto que conecta um smartphone ao Arduino, permitindo controle de LEDs através do dispositivo móvel. Esta prática demonstra a integração entre hardware e software, além de introduzir conceitos de comunicação serial e Bluetooth.</p>
+            
+            <p><strong>Aplicação:</strong> Controle remoto de dispositivos, automação residencial e Internet das Coisas (IoT) [[18]][[19]].</p>
+
+            <h3>5. Montagem de Circuitos Avançados</h3>
+            <p>Trabalho em equipe para montagem de circuitos mais complexos utilizando múltiplos componentes, incluindo botões, joysticks e módulos de controle, desenvolvendo habilidades de trabalho colaborativo e resolução de problemas.</p>
+        </section>
+
+        <section class="section">
+            <h2> Componentes Principais</h2>
+            <div class="componentes-grid">
+                <div class="componente-card">
+                    <h4>🎛️ Arduino Uno</h4>
+                    <p><strong>Função:</strong> Placa de microcontrolador programável que é o "cérebro" dos projetos.</p>
+                    <p><strong>Importância:</strong> Permite controlar componentes eletrônicos através de programação, sendo a base para prototipagem de projetos de automação e robótica.</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4>📊 Breadboard (Protoboard)</h4>
+                    <p><strong>Função:</strong> Placa de prototipagem que permite montar circuitos sem solda.</p>
+                    <p><strong>Importância:</strong> Facilita testes e modificações nos circuitos, sendo essencial para aprendizado e desenvolvimento de projetos [[1]].</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4>💡 LEDs</h4>
+                    <p><strong>Função:</strong> Diodos emissores de luz que convertem energia elétrica em luz.</p>
+                    <p><strong>Importância:</strong> Componentes básicos para indicação visual, iluminação e comunicação em circuitos eletrônicos [[2]].</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4>🔌 Resistores</h4>
+                    <p><strong>Função:</strong> Limitam a corrente elétrica que passa pelos componentes.</p>
+                    <p><strong>Importância:</strong> Protegem LEDs e outros componentes contra danos por excesso de corrente.</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4> Sensor Capacitivo</h4>
+                    <p><strong>Função:</strong> Detecta presença ou proximidade sem contato físico.</p>
+                    <p><strong>Importância:</strong> Utilizado em interfaces touch, automação e sistemas de detecção [[10]].</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4> Fios Jumper</h4>
+                    <p><strong>Função:</strong> Conectam os componentes na breadboard e ao Arduino.</p>
+                    <p><strong>Importância:</strong> Permitem criar as conexões elétricas necessárias para o funcionamento dos circuitos [[1]].</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4>🎨 Disco de Newton</h4>
+                    <p><strong>Função:</strong> Demonstra a composição da luz branca através das cores do espectro.</p>
+                    <p><strong>Importância:</strong> Ilustra princípios fundamentais da óptica e teoria das cores [[15]].</p>
+                </div>
+
+                <div class="componente-card">
+                    <h4>📱 Smartphone</h4>
+                    <p><strong>Função:</strong> Interface de controle e comunicação com o Arduino.</p>
+                    <p><strong>Importância:</strong> Permite controle remoto e integração com aplicativos móveis [[20]].</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>📸 Galeria de Imagens</h2>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23667eea' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle'%3EArduino com LEDs%3C/text%3E%3C/svg%3E" alt="Arduino com LEDs">
+                    <p>Circuito Arduino com LEDs coloridos na breadboard</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23764ba2' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle'%3ESensor Capacitivo%3C/text%3E%3C/svg%3E" alt="Sensor Capacitivo">
+                    <p>Teste do sensor capacitivo de proximidade</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f093fb' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle'%3EDisco de Newton%3C/text%3E%3C/svg%3E" alt="Disco de Newton">
+                    <p>Disco de Newton demonstrando mistura de cores</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%234facfe' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle'%3ETrabalho em Equipe%3C/text%3E%3C/svg%3E" alt="Trabalho em Equipe">
+                    <p>Montagem de circuitos em equipe</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%2343e97b' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle'%3EArduino + Smartphone%3C/text%3E%3C/svg%3E" alt="Arduino com Smartphone">
+                    <p>Integração entre Arduino e smartphone</p>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23fa709a' width='400' height='300'/%3E%3Ctext x='50%25' y='50%25' font-size='20' fill='white' text-anchor='middle'%3ECircuitos Avançados%3C/text%3E%3C/svg%3E" alt="Circuitos Avançados">
+                    <p>Montagem de circuitos complexos</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>🎥 Vídeos das Práticas</h2>
+            <p><strong>Disco de Newton em funcionamento:</strong></p>
+            <div class="video-container">
+                <video controls>
+                    <source src="video_newton.mp4" type="video/mp4">
+                    Seu navegador não suporta o elemento de vídeo.
+                </div>
+            </div>
+            <p class="highlight">Para visualizar o vídeo, salve o arquivo de vídeo na mesma pasta do HTML ou insira o link do vídeo hospedado.</p>
+        </section>
+
+        <section class="section">
+            <h2>💡 Importância e Aprendizados</h2>
+            <p>As práticas desenvolvidas ao longo do semestre foram fundamentais para:</p>
+            <ul>
+                <li><strong>Compreensão teórica e prática:</strong> Unir conceitos teóricos de física, eletrônica e programação com aplicações reais.</li>
+                <li><strong>Desenvolvimento de habilidades técnicas:</strong> Aprender a montar circuitos, soldar componentes e programar microcontroladores.</li>
+                <li><strong>Trabalho em equipe:</strong> Colaborar com colegas para resolver problemas e completar projetos.</li>
+                <li><strong>Pensamento lógico:</strong> Desenvolver raciocínio lógico através da programação e depuração de códigos.</li>
+                <li><strong>Criatividade:</strong> Criar soluções inovadoras para os desafios propostos.</li>
+                <li><strong>Preparação para o futuro:</strong> Adquirir conhecimentos essenciais para áreas como robótica, automação, IoT e desenvolvimento de hardware.</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Conclusão:</strong> As práticas com Arduino e eletrônica proporcionaram uma experiência de aprendizado enriquecedora, permitindo não apenas compreender o funcionamento dos componentes eletrônicos, mas também desenvolver habilidades importantes para o século XXI, como pensamento computacional, resolução de problemas e trabalho colaborativo.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>👥 Integrantes do Grupo</h2>
+            <p><em>Preencher com os nomes dos integrantes do grupo</em></p>
+            <ul>
+                <li>Pedro Henrique Frois</li>
+                <li>Gustavo Rodrigues</li>
+                <li>Guilherme Effegen</li>
+                <li>Eduardo França</li>
+                <li>Davi Goss</li>
+                <li>Nicolas Bueno</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p><strong>Relatório de Práticas - Eletrônica e Arduino</strong></p>
+            <p>Trabalho de Recuperação - 2º Semestre 2024</p>
+            <p>Entrega: 28/08/2024</p>
+            <p>Email: levi.andrade.lima@escola.pr.gov.br</p>
+        </footer>
+    </div>
+
+    <script>
+        // Animação suave ao rolar a página
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
